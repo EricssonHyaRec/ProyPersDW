@@ -1,0 +1,29 @@
+<app-menu></app-menu>
+
+<div *ngIf="isSuperUser; else noAccess" class="user-list-container">
+  <h2 class="text-center my-4 user-list-title">Lista de Usuarios Registrados </h2>
+  <h3> SuperUsuario: "{{userName}}"  </h3>
+  <!-- Usando la tabla de PrimeNG con clase personalizada para el fondo oscuro -->
+  <p-table [value]="users" responsiveLayout="scroll" class="user-table">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Fecha de Registro</th>
+      </tr>
+      
+    </ng-template>
+
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td >{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.date_joined | date: 'dd/MM/yyyy' }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<ng-template #noAccess>
+  <p class="alert alert-warning text-center user-list-no-access">No tienes permiso para acceder a esta información.</p>
+</ng-template>

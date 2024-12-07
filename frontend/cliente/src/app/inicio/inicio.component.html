@@ -1,0 +1,39 @@
+<div class="d-flex flex-column min-vh-100">
+  <header class="header p-shadow-3">
+    <app-menu></app-menu>
+    <nav class="desktop-nav">
+      <ul>
+        <li *ngIf="!isAuthenticated">
+          <button pButton class="p-button p-button-outlined" [rounded]="true" icon="pi pi-user" [routerLink]="['/login']"> Iniciar Sesión </button>
+        </li>
+        <li *ngIf="!isAuthenticated">
+          <button pButton class="p-button p-button-help" [rounded]="true" icon="pi pi-user-plus" [routerLink]="['/register']"> Registrarse </button>
+        </li>
+        <li *ngIf="isAuthenticated">
+          <button pButton class="p-button p-button-secondary" [text]="true" [outlined]="true" icon="pi pi-users" 
+          [routerLink]="['/medicos']"> Usuario "{{userName}}"</button>  </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="main-content">
+    <router-outlet></router-outlet> <!-- Aquí se carga el contenido de las rutas -->
+  </div>
+
+  <!-- Sección de bienvenida y cita -->
+  <section class="content-container">
+    <div class="columna">
+      <h1>¡Bienvenido, {{userName}}!</h1>
+      <p>¿Deseas agendar una cita? Estás en el lugar indicado. Te ofrecemos la mejor atención.</p>
+      <hr>
+      <hr>
+      <p> </p>
+      <p-button label="Agendar Cita" icon="pi pi-calendar" [routerLink]="['/citas']" class="p-button-lg p-button-success"></p-button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p class="footerText">© Huancaya Recines Ericsson DW. Reservados todos los derechos.</p>
+  </footer>
+</div>

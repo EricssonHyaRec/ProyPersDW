@@ -1,0 +1,22 @@
+h2 {
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+/* Estilo para el mensaje de acceso restringido */
+.user-list-no-access {
+  background-color: #ffcc00; 
+  color: #333; 
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}

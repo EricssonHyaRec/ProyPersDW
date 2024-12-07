@@ -1,0 +1,14 @@
+<p-panel header="Acceso al sistema de citas" styleClass="login-panel">
+    <div class="login-content">
+        <p class="label">Usuario: <i class="pi pi-user" ></i></p>
+        <input type="text" pInputText [(ngModel)]="usuario" class="input-field" placeholder="Ingresa tu usuario" />
+
+        <p class="label">Contraseña: <i class="pi pi-lock" > </i></p>
+        <input type="password" pInputText [(ngModel)]="clave" class="input-field" placeholder="Ingresa tu contraseña" />
+
+        <div class="button-group">
+            <p-button label="Ingresar" icon="pi pi-key" (onClick)="ingresar()" [routerLink]="['/inicio']" severity="contrast" [rounded]="true"></p-button>
+            <p-button label="Registrar" icon="pi pi-user-plus" [routerLink]="['/registro']" [rounded]="true"></p-button>
+        </div>
+    </div>
+</p-panel>

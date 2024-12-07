@@ -1,0 +1,108 @@
+<app-menu></app-menu>
+<p-confirmDialog></p-confirmDialog>
+<h1>Citas</h1>
+<div *ngIf="isSuperUser">
+    <p>Bienvenido, {{ userName }}!. SuperUsuario estas son todas las citas Registradas</p>
+  </div>
+<div *ngIf="!isSuperUser">
+    <p>Bienvenido, {{ userName }}!. Estas son tus citas Registradas</p>
+</div>
+<!-- Tabla de citas -->
+<p-table [value]="citas" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th>Fecha</th>
+            <th>Asunto</th>
+            <th>Médico</th>
+            <th style="width: 20%;">Accciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cita>
+        <tr>
+            <td>{{ cita.id }}</td>
+            <td>{{ cita.fecha }}</td>
+            <td>{{ cita.asunto }}</td>
+            <td>{{ cita.nombremedico }}</td>
+            <td>
+                <div class="flex align-items-center justify-content-center gap-2">
+                    <button 
+                        pButton
+                        pRipple
+                        type="button" 
+                        severity="info"
+                        icon="pi pi-pencil" 
+                        (click)="editarCita(cita)" 
+                        class="p-button-rounded p-button-text"
+                        style="background-color: blanchedalmond;">
+                    </button>
+                    <button 
+                        pButton
+                        pRipple
+                        type="button" 
+                        severity="danger"
+                        icon="pi pi-trash" 
+                        (click)="eliminarCita(cita)" 
+                        class="p-button-rounded p-button-text"
+                        style="background-color: blanchedalmond;">
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<!-- Botón para abrir el diálogo -->
+<p-button (onClick)="verDialogo()" label="Crear Cita" icon="pi pi-plus-circle"></p-button>
+
+<!-- Diálogo para crear/editar cita -->
+<p-dialog header="{{ tituloDialogo }}" [modal]="true" [(visible)]="visible" [style]="{ width: '35rem' }">
+    <div class="container">
+        <div class="row espacio">
+            <span class="p-text-secondary block mb-5">Ingrese los datos de la cita.</span>
+        </div>
+        <div class="row espacio">
+            <div class="flex align-items-center gap-4 mb-3">
+                <label for="fecha" class="font-semibold w-10rem">Fecha</label>
+                <p-calendar 
+                    id="fecha" 
+                    [(ngModel)]="nuevaCita.fecha"
+                    dateFormat="yy-mm-dd"  
+                    [showIcon]="true" 
+                    appendTo="body" 
+                    class="textoForm"></p-calendar>
+            </div>
+        </div>
+        <div class="row espacio">
+            <div class="flex align-items-center gap-4 mb-3">
+                <label for="asunto" class="font-semibold w-10rem">Asunto</label>
+                <input 
+                    pInputText 
+                    [(ngModel)]="nuevaCita.asunto" 
+                    id="asunto" 
+                    class="textoForm" 
+                    placeholder="Escriba el asunto" 
+                    autocomplete="off" />
+            </div>
+        </div>
+        <div class="row espacio">
+            <div class="flex align-items-center gap-4 mb-3">
+                <label for="medico" class="font-semibold w-10rem">Médico</label>
+                <p-dropdown 
+                    id="medico"
+                    [options]="personas" 
+                    [(ngModel)]="personaSeleccionada" 
+                    optionLabel="nombre" 
+                    placeholder="Seleccione un médico"
+                    appendTo="body" 
+                    class="textoForm"></p-dropdown>
+            </div>
+        </div>
+        <div class="row espacio">
+            <div class="flex justify-content-end gap-3 mt-4">
+                <p-button label="Cancelar" severity="secondary" [rounded]="true" [outlined]="true" (onClick)="visible = false" icon="pi pi-times"></p-button>
+                <p-button label="Guardar" (onClick)="guardarCita()" [rounded]="true" severity="success" icon="pi pi-file-plus"></p-button>
+            </div>
+        </div>
+    </div>
+</p-dialog>

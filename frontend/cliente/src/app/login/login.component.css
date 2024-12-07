@@ -1,0 +1,28 @@
+.login-content{
+    max-width: 45%;
+}
+.label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Estilo de los campos de entrada */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* Agrupar los botones */
+.button-group p-button {
+    margin: 10px;
+}
+.button-group {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+}
